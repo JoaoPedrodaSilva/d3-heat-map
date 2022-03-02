@@ -105,15 +105,15 @@ const createLegend = (dataSet) => {
   const legendWidth = 400
   const legendHeight = 90  
   const legendPad = 30
-  const legendRectWidth = (legendWidth - 2 * legendPad) / colors.length
+  const legendRectWidth = legendWidth / colors.length
   
   d3.select('#legend')
     .attr('width', legendWidth)
     .attr('height', legendHeight) 
   
   const legendXScale = d3.scaleLinear()
-                       .domain([d3.min(dataSet, d => d.temp - 1),
-                                d3.max(dataSet, d => d.temp + 1)])
+                       .domain([d3.min(dataSet, d => d.temp),
+                                d3.max(dataSet, d => d.temp)])
                        .range([0, legendWidth])
   
   const legendXAxis = d3.axisBottom(legendXScale)
@@ -130,7 +130,7 @@ const createLegend = (dataSet) => {
     .append('rect')
     .attr('width', legendRectWidth)
     .attr('height', (legendHeight - 2 * legendPad))
-    .attr('x', (_, i) => i * legendRectWidth + legendPad)
+    .attr('x', (_, i) => i * legendRectWidth)
     .attr('y', legendPad)
     .attr('fill', c => c)
 }
