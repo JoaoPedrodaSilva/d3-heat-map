@@ -91,8 +91,8 @@ const createCells = (dataSet) => {
     .on('mouseover', (_, d, i) => {
       tooltip.classList.add('visible')
       tooltip.setAttribute('data-year', d.year)
-      tooltip.style.left = xScale(d.year) + 65 + 'px'
-    
+      tooltip.style.left = xScale(d.year) + 220 + 'px'
+      tooltip.style.top = yScale(new Date(0, d.month - 1, 0, 0, 0, 0, 0)) + 15 + 'px'
       tooltip.innerHTML = (`
         <p>${d.year} - ${months[d.month - 1]}</p>
         <p>Temperature: ${d.temp.toFixed(3)}°C</p>
@@ -112,8 +112,8 @@ const createLegend = (dataSet) => {
     .attr('height', legendHeight) 
   
   const legendXScale = d3.scaleLinear()
-                       .domain([d3.min(dataSet, d => d.temp),
-                                d3.max(dataSet, d => d.temp)])
+                       .domain([d3.min(dataSet, d => d.temp - 1),
+                                d3.max(dataSet, d => d.temp + 1)])
                        .range([0, legendWidth])
   
   const legendXAxis = d3.axisBottom(legendXScale)
