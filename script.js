@@ -16,9 +16,9 @@ req.onload = () => {
 req.send()
 
 const colors = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
-const w = 1200
-const h = 600
-const pad = 65
+const w = 700
+const h = 550
+const pad = 60
 let xScale
 let yScale
 let temperatureScale
@@ -88,11 +88,11 @@ const createCells = (dataSet) => {
     .attr('x', d => xScale(d.year))
     .attr('y', d => yScale(new Date(0, d.month - 1, 0, 0, 0, 0, 0)))
     .attr('fill', d => colors[Math.floor(temperatureScale(d.temp))])
-    .on('mouseover', (_, d, i) => {
+    .on('mouseover', (e, d, i) => {
       tooltip.classList.add('visible')
       tooltip.setAttribute('data-year', d.year)
-      tooltip.style.left = xScale(d.year) + 220 + 'px'
-      tooltip.style.top = yScale(new Date(0, d.month - 1, 0, 0, 0, 0, 0)) + 15 + 'px'
+      tooltip.style.left = e.pageX + 'px'
+      tooltip.style.top = e.pageY + 'px'
       tooltip.innerHTML = (`
         <p>${d.year} - ${months[d.month - 1]}</p>
         <p>Temperature: ${d.temp.toFixed(3)}°C</p>
@@ -103,7 +103,7 @@ const createCells = (dataSet) => {
 
 const createLegend = (dataSet) => {
   const legendWidth = 400
-  const legendHeight = 90  
+  const legendHeight = 70  
   const legendPad = 30
   const legendRectWidth = legendWidth / colors.length
   
