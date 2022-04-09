@@ -59,6 +59,7 @@ const createAxes = () => {
                 d3.select('.d3-content')
                   .append('g')
                   .attr('transform', 'translate(0, ' + (h - pad) + ')')
+                  .style("font-size", "12px")
                   .call(xAxis)
   
   const yAxis = d3.axisLeft(yScale)
@@ -66,6 +67,7 @@ const createAxes = () => {
                 d3.select('.d3-content')
                   .append('g')
                   .attr('transform', 'translate(' + (pad) + ',0)')
+                  .style("font-size", "12px")
                   .call(yAxis)
 }
 
